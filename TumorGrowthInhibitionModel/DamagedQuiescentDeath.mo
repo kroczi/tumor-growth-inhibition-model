@@ -3,7 +3,7 @@ within TumorGrowthInhibitionModel;
 model DamagedQuiescentDeath
   TumorGrowthInhibitionModel.CellConnector damagedQuiescent annotation(
     Placement(visible = true, transformation(origin = {-200, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {0, 98}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-  parameter Real delta_Qp(start=1.0);
+  parameter Real delta_Qp(start=0.00867);
   
 equation
   damagedQuiescent.rate = delta_Qp * damagedQuiescent.amount;

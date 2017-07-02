@@ -5,7 +5,7 @@ model DamagedQuiescentRepair
     Placement(visible = true, transformation(origin = {-200, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100,0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
   TumorGrowthInhibitionModel.CellConnector proliferative annotation(
     Placement(visible = true, transformation(origin = {-200, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-  parameter Real k_QpP(start=1.0);
+  parameter Real k_QpP(start=0.0031);
 
 equation
   damagedQuiescent.rate = k_QpP * damagedQuiescent.amount;

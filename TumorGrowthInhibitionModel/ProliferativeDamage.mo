@@ -7,7 +7,7 @@ model ProliferativeDamage
     Placement(visible = true, transformation(origin = {-200, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {0, -100}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
   TumorGrowthInhibitionModel.CellConnector proliferative annotation(
     Placement(visible = true, transformation(origin = {-200, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-  parameter Real gamma_P(start=1.0);
+  parameter Real gamma_P(start=0.729);
 
 equation
   proliferative.rate = -gamma_P * treatmentIn.rate * proliferative.amount;

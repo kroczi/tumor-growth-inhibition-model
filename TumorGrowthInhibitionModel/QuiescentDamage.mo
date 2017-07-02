@@ -9,7 +9,7 @@ model QuiescentDamage
     Placement(visible = true, transformation(origin = {-200, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
   TumorGrowthInhibitionModel.CellConnector damagedQuiescent annotation(
     Placement(visible = true, transformation(origin = {-200, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-  parameter Real gamma_Q(start=1.0);
+  parameter Real gamma_Q(start=0.729);
 
 equation
   quiescent.rate = -gamma_Q * treatmentIn.rate * quiescent.amount;

@@ -1,31 +1,33 @@
 within TumorGrowthInhibitionModel;
 
-model TumourSystem
+model TumorSystem
   TumorGrowthInhibitionModel.Volume treatment(initial_amount = 1)  annotation(
     Placement(visible = true, transformation(origin = {-30, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  TumorGrowthInhibitionModel.Volume proliferative(initial_amount = 40)  annotation(
+  TumorGrowthInhibitionModel.Volume proliferative(initial_amount = 7.13)  annotation(
     Placement(visible = true, transformation(origin = {-70, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  TumorGrowthInhibitionModel.Volume quiescent(initial_amount = 10)  annotation(
+  TumorGrowthInhibitionModel.Volume quiescent(initial_amount = 41.2)  annotation(
     Placement(visible = true, transformation(origin = {-10, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   TumorGrowthInhibitionModel.Volume damagedQuiescent(initial_amount = 0)  annotation(
     Placement(visible = true, transformation(origin = {70, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  TumorGrowthInhibitionModel.DamagedQuiescentDeath damagedQuiescentDeath annotation(
+  TumorGrowthInhibitionModel.DamagedQuiescentDeath damagedQuiescentDeath(delta_Qp = 0.00867)  annotation(
     Placement(visible = true, transformation(origin = {90, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  TumorGrowthInhibitionModel.DamagedQuiescentRepair damagedQuiescentRepair annotation(
+  TumorGrowthInhibitionModel.DamagedQuiescentRepair damagedQuiescentRepair(k_QpP = 0.0031)  annotation(
     Placement(visible = true, transformation(origin = {30, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  TumorGrowthInhibitionModel.Passivation passivation annotation(
+  TumorGrowthInhibitionModel.Passivation passivation(k_PQ = 0.0295)  annotation(
     Placement(visible = true, transformation(origin = {-50, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  TumorGrowthInhibitionModel.ProliferativeDamage proliferativeDamage annotation(
+  TumorGrowthInhibitionModel.ProliferativeDamage proliferativeDamage(gamma_P = 0.729)  annotation(
     Placement(visible = true, transformation(origin = {-10, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  TumorGrowthInhibitionModel.QuiescentDamage quiescentDamage annotation(
+  TumorGrowthInhibitionModel.QuiescentDamage quiescentDamage(gamma_Q = 0.729)  annotation(
     Placement(visible = true, transformation(origin = {30, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  TumorGrowthInhibitionModel.Decay decay annotation(
-    Placement(visible = true, transformation(origin = {50, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  TumorGrowthInhibitionModel.Decay decay(KDE = 0.24)  annotation(
+    Placement(visible = true, transformation(origin = {48, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   TumorGrowthInhibitionModel.Aggregation aggregation annotation(
     Placement(visible = true, transformation(origin = {10, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  TumorGrowthInhibitionModel.Proliferation proliferation(K = 100)  annotation(
+  TumorGrowthInhibitionModel.Proliferation proliferation(K = 100, lambda_P = 0.121)  annotation(
     Placement(visible = true, transformation(origin = {-90, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
+  connect(quiescentDamage.treatmentIn, decay.treatment) annotation(
+    Line(points = {{30, 40}, {30, 50}, {48, 50}, {48, -40}}));
   connect(quiescent.cellConnector, passivation.quiescent) annotation(
     Line(points = {{-10, 39.8}, {-12, 39.8}, {-12, 50}, {-40, 50}}));
   connect(passivation.proliferative, proliferative.cellConnector) annotation(
@@ -40,8 +42,6 @@ equation
     Line(points = {{-70, -20.2}, {-66, -20.2}, {-66, -14.2}, {-50, -14.2}, {-50, -70.2}, {0, -70.2}, {0, -70.2}}));
   connect(damagedQuiescent.cellConnector, aggregation.damagedQuiescent) annotation(
     Line(points = {{70, -0.2}, {74, -0.2}, {74, 9.8}, {90, 9.8}, {90, -70.2}, {20, -70.2}, {20, -70.2}}));
-  connect(quiescentDamage.treatmentIn, decay.treatment) annotation(
-    Line(points = {{30, 40}, {30, 50}, {50, 50}, {50, -40}}));
   connect(quiescentDamage.damagedQuiescent, damagedQuiescent.cellConnector) annotation(
     Line(points = {{40, 30}, {66, 30}, {66, 0}, {70, 0}, {70, 0}}));
   connect(quiescentDamage.treatmentOut, proliferativeDamage.treatmentIn) annotation(
@@ -58,4 +58,4 @@ equation
     Line(points = {{40, 70}, {68, 70}, {68, 0}, {70, 0}}));
   connect(damagedQuiescent.cellConnector, damagedQuiescentDeath.damagedQuiescent) annotation(
     Line(points = {{70, -0.2}, {72, -0.2}, {72, 49.8}, {90, 49.8}, {90, 39.8}, {90, 39.8}}));
-end TumourSystem;
+end TumorSystem;

@@ -3,7 +3,7 @@ within TumorGrowthInhibitionModel;
 model Decay
   TumorGrowthInhibitionModel.CellConnector treatment annotation(
     Placement(visible = true, transformation(origin = {-2, 98}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {0, 98}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-  parameter Real KDE(start=1.0);
+  parameter Real KDE(start=0.24);
   
 equation
   treatment.rate = KDE * treatment.amount;
