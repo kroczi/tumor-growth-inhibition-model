@@ -8,4 +8,7 @@ Passivation
 DamagedQuiescentRepair
 DamagedQuiescentDeath
 Aggregation
-TumorSystem
+Merger
+ComplexTumorSystem
+SimpleTumorSystem
+InterSystemConnector
